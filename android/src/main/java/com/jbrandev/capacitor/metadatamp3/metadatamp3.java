@@ -1,5 +1,6 @@
 package com.jbrandev.capacitor.metadatamp3;
 
+import android.net.Uri;
 import android.util.Log;
 
 import com.getcapacitor.JSObject;
@@ -26,10 +27,24 @@ public class metadatamp3 {
         return value;
     }
 
+    /**
+     * Removes the "file://" prefix from the given URI string, if applicable.
+     * If the given URI string doesn't have a "file://" prefix, it is returned unchanged.
+     *
+     * @param uriString the URI string to operate on
+     * @return a path without the "file://" prefix
+     */
+    public static String stripFileProtocol(String uriString) {
+        if (uriString.startsWith("file://")) {
+            return Uri.parse(uriString).getPath();
+        }
+        return uriString;
+    }
+
     public JSObject getMetaData(String ruta)  {
         JSObject metadata = new JSObject();
         try {
-            File archivoMp3=new File(ruta);
+            File archivoMp3=new File(stripFileProtocol(ruta));
             AudioFile file= AudioFileIO.read(archivoMp3);
             Tag tag= file.getTag();
             Log.i("MetaDataMp3", "Obtuvo las tags del archivo MP3 ");

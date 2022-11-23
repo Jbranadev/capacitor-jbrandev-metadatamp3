@@ -1,10 +1,35 @@
 import { WebPlugin } from '@capacitor/core';
 
-import type { metadatamp3Plugin } from './definitions';
+import type { File, MetaDataMp3, metadatamp3Plugin, PermissionStatus } from './definitions';
+
 
 export class metadatamp3Web extends WebPlugin implements metadatamp3Plugin {
+  
+  async requestPermissions(): Promise<PermissionStatus> {
+    // TODO
+    throw this.unimplemented('Not implemented on web.');
+  }
+
+  async checkPermissions(): Promise<PermissionStatus> {
+    // TODO
+    throw this.unimplemented('Not implemented on web.');
+  }
+
+  
   async echo(options: { value: string }): Promise<{ value: string }> {
     console.log('ECHO', options);
     return options;
   }
+
+  async getMetadata(file:File):Promise<MetaDataMp3>{
+    console.log('Corrio el metodo web para obtener metadata: '+file.name);
+    let respuesta:MetaDataMp3={"data":[]};
+    return respuesta;
+  }
+
+  
+  
+  
+
+
 }
