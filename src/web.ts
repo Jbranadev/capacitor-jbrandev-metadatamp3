@@ -22,9 +22,7 @@ export class metadatamp3Web extends WebPlugin implements metadatamp3Plugin {
   }
 
   async getMetadata(file:File):Promise<MetaDataMp3>{
-    console.log('Corrio el metodo web para obtener metadata: '+file.name);
-    let respuesta:MetaDataMp3={"data":[]};
-    return respuesta;
+    throw this.unimplemented('Not implemented on web.' +file.name);
   }
 
   

@@ -1,24 +1,14 @@
 package com.jbrandev.capacitor.metadatamp3;
 
+import android.media.MediaMetadataRetriever;
 import android.net.Uri;
 import android.util.Log;
 
 import com.getcapacitor.JSObject;
-
-import org.jaudiotagger.audio.AudioFile;
-import org.jaudiotagger.audio.AudioFileIO;
-import org.jaudiotagger.audio.exceptions.CannotReadException;
-import org.jaudiotagger.audio.exceptions.InvalidAudioFrameException;
-import org.jaudiotagger.audio.exceptions.ReadOnlyFileException;
-import org.jaudiotagger.tag.FieldKey;
-import org.jaudiotagger.tag.Tag;
-import org.jaudiotagger.tag.TagException;
-import org.jaudiotagger.tag.TagField;
-
+import com.google.gson.Gson;
 import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.Base64;
 
 public class metadatamp3 {
 
@@ -44,31 +34,46 @@ public class metadatamp3 {
     public JSObject getMetaData(String ruta)  {
         JSObject metadata = new JSObject();
         try {
+            MediaMetadataRetriever fuente=new MediaMetadataRetriever();
+            fuente.setDataSource(stripFileProtocol(ruta));
             File archivoMp3=new File(stripFileProtocol(ruta));
-            AudioFile file= AudioFileIO.read(archivoMp3);
-            Tag tag= file.getTag();
+            Log.i("MetaDataMp3", "Creo la instancia File");
+            if(archivoMp3.exists()){
+                Log.i("MetaDataMp3", "Archivo MP3 Existe");
+            }
+
+
             Log.i("MetaDataMp3", "Obtuvo las tags del archivo MP3 ");
             //ArrayList<JSObject> arrayMetaData=new ArrayList<>();
             ArrayList<MetaData> arrayMetaData=new ArrayList<>();
-            arrayMetaData.add(new MetaData("CoverString", tag.getFirst(FieldKey.COVER_ART)));
-            arrayMetaData.add(new MetaData("CoverField", tag.getFirstField(FieldKey.COVER_ART)));
-            arrayMetaData.add(new MetaData("Album", tag.getFirst(FieldKey.ALBUM)));
-            arrayMetaData.add(new MetaData("Artist", tag.getFirst(FieldKey.ARTIST)));
-            arrayMetaData.add(new MetaData("Year", tag.getFirst(FieldKey.YEAR)));
-            arrayMetaData.add(new MetaData("Track", tag.getFirst(FieldKey.TRACK)));
-            arrayMetaData.add(new MetaData("Disk", tag.getFirst(FieldKey.DISC_NO)));
-            arrayMetaData.add(new MetaData("Composer", tag.getFirst(FieldKey.COMPOSER)));
-            arrayMetaData.add(new MetaData("ArtistSort", tag.getFirst(FieldKey.ARTIST_SORT)));
-            arrayMetaData.add(new MetaData("Language", tag.getFirst(FieldKey.LANGUAGE)));
-            arrayMetaData.add(new MetaData("Title", tag.getFirst(FieldKey.TITLE)));
+            ArrayList<JSObject> data=new ArrayList<>();
+            String imagen= null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                imagen = Base64.getEncoder().encodeToString(fuente.getEmbeddedPicture());
+            }
+            arrayMetaData.add(new MetaData("Duracion", fuente.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)));
+            //arrayMetaData.add(new MetaData("Imagen",  imagen));
+            arrayMetaData.add(new MetaData("Album", fuente.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM)));
+            arrayMetaData.add(new MetaData("Artist", fuente.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST)));
+            arrayMetaData.add(new MetaData("Year", fuente.extractMetadata(MediaMetadataRetriever.METADATA_KEY_YEAR)));
+            arrayMetaData.add(new MetaData("Track", fuente.extractMetadata(MediaMetadataRetriever.METADATA_KEY_CD_TRACK_NUMBER)));
+            arrayMetaData.add(new MetaData("Disk", fuente.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DISC_NUMBER)));
+            arrayMetaData.add(new MetaData("Composer", fuente.extractMetadata(MediaMetadataRetriever.METADATA_KEY_COMPOSER)));
+            arrayMetaData.add(new MetaData("ArtistSort", fuente.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUMARTIST)));
+            arrayMetaData.add(new MetaData("Title", fuente.extractMetadata(MediaMetadataRetriever.METADATA_KEY_TITLE)));
+
             Log.i("MetaDataMp3", "Tags del archivo MP3 ");
             for (MetaData meta:arrayMetaData) {
-                Log.i("MetaDataMp3", "Nombre: "+meta.name);
-                Log.i("MetaDataMp3", "Value: "+meta.value);
+                Log.i("MetaDataMp3", "Nombre: "+ meta.getName());
+                Log.i("MetaDataMp3", "Value: "+ meta.getValue());
+                JSObject temp=new JSObject(new Gson().toJson(meta));
+                data.add(temp);
             }
-            metadata.put("data", arrayMetaData);
-        }catch ( CannotReadException | TagException| InvalidAudioFrameException|
-                ReadOnlyFileException| IOException e){
+            Log.i("MetaDataMp3", "Data enviada a Capacitor desde Android: "+arrayMetaData.size());
+            Log.i("MetaDataMp3", "Data enviada a Capacitor desde Android: "+data.size());
+            metadata.put("data",data);
+
+        }catch (Exception e){
             Log.e("MetaDataMp3", "Error capturado al leer el archivo MP3 ");
             this.printError(e);
         }
