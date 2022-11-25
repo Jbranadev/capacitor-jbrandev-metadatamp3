@@ -63,8 +63,8 @@ public class metadatamp3 {
 
             Log.i("MetaDataMp3", "Tags del archivo MP3 ");
             for (MetaData meta:arrayMetaData) {
-                Log.i("MetaDataMp3", "Nombre: "+ meta.getName());
-                Log.i("MetaDataMp3", "Value: "+ meta.getValue());
+                /*Log.i("MetaDataMp3", "Nombre: "+ meta.getName());
+                Log.i("MetaDataMp3", "Value: "+ meta.getValue());*/
                 JSObject temp=new JSObject(new Gson().toJson(meta));
                 data.add(temp);
             }
