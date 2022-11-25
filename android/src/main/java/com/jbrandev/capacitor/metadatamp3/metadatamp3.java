@@ -7,6 +7,7 @@ import android.util.Log;
 import com.getcapacitor.JSObject;
 import com.google.gson.Gson;
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Base64;
 
@@ -41,18 +42,16 @@ public class metadatamp3 {
             if(archivoMp3.exists()){
                 Log.i("MetaDataMp3", "Archivo MP3 Existe");
             }
-
-
             Log.i("MetaDataMp3", "Obtuvo las tags del archivo MP3 ");
-            //ArrayList<JSObject> arrayMetaData=new ArrayList<>();
             ArrayList<MetaData> arrayMetaData=new ArrayList<>();
             ArrayList<JSObject> data=new ArrayList<>();
             String imagen= null;
-            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            /*if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
                 imagen = Base64.getEncoder().encodeToString(fuente.getEmbeddedPicture());
-            }
+            }*/
+            imagen=new String(fuente.getEmbeddedPicture(), StandardCharsets.UTF_8);
             arrayMetaData.add(new MetaData("Duracion", fuente.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION)));
-            //arrayMetaData.add(new MetaData("Imagen",  imagen));
+            arrayMetaData.add(new MetaData("Imagen",  imagen));
             arrayMetaData.add(new MetaData("Album", fuente.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ALBUM)));
             arrayMetaData.add(new MetaData("Artist", fuente.extractMetadata(MediaMetadataRetriever.METADATA_KEY_ARTIST)));
             arrayMetaData.add(new MetaData("Year", fuente.extractMetadata(MediaMetadataRetriever.METADATA_KEY_YEAR)));
@@ -74,7 +73,7 @@ public class metadatamp3 {
             metadata.put("data",data);
 
         }catch (Exception e){
-            Log.e("MetaDataMp3", "Error capturado al leer el archivo MP3 ");
+            Log.e("MetaDataMp3", "Error capturado al leer la meta data del archivo MP3 ");
             this.printError(e);
         }
         return metadata;

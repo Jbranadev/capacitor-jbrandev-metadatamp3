@@ -22,7 +22,7 @@ export interface MetaDataMp3{
 
 export interface MetaData{
   name:string;
-  value:any;
+  value:string;
 }
 
 export interface PermissionStatus {

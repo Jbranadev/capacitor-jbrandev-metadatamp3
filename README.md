@@ -92,7 +92,7 @@ requestPermissions() => Promise<PermissionStatus>
 | Prop        | Type                |
 | ----------- | ------------------- |
 | **`name`**  | <code>string</code> |
-| **`value`** | <code>any</code>    |
+| **`value`** | <code>string</code> |
 
 
 #### File
