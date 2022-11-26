@@ -32,6 +32,11 @@ public class metadatamp3 {
         return uriString;
     }
 
+    /**
+     * Obtiene la metada data del archivo mp3 especificado
+     * @param ruta Ruta del archivo MP3 a obtener la meta data
+     * @return Retorna un Json con la metadata obtenida
+     */
     public JSObject getMetaData(String ruta)  {
         JSObject metadata = new JSObject();
         try {
@@ -80,6 +85,10 @@ public class metadatamp3 {
     }
 
 
+    /**
+     * Imprime el error capturado durante la extracción de meta data del archivo mp3
+     * @param e Excepción capturada
+     */
     private void printError(Exception e){
         Log.e("MetaDataMp3", "Error capturado al leer el archivo MP3 ");
         Log.e("MetaDataMp3", ""+e.getClass());

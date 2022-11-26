@@ -29,6 +29,11 @@ public class metadatamp3Plugin extends Plugin {
     private metadatamp3 implementation = new metadatamp3();
 
 
+    /**
+     * Valida que la aplicación tenga los permisos requeridos para el
+     * correcto funcionamiento del pluggin
+     * @param call Llamada del pluggin con la información de la sesión
+     */
     @PermissionCallback
     private void storagePermsCallback(PluginCall call) {
         if (getPermissionState("storage") == PermissionState.GRANTED) {
@@ -48,6 +53,11 @@ public class metadatamp3Plugin extends Plugin {
         call.resolve(ret);
     }
 
+    /**
+     * Recibe la llamada desde la aplicación angular y retorna la meta data obtenida del archivo mp3
+     * especificado
+     * @param call Llamada del pluggin con la información de la sesión
+     */
     @PluginMethod
     public void getMetadata(PluginCall call){
         if (getPermissionState("storage") != PermissionState.GRANTED) {
