@@ -16,10 +16,10 @@ export interface metadatamp3Plugin {
 }
 
 /**
- * @Interface
- * @File Representa el file del cual se quiere obtener la metadata
- * @property {string} [name] - Nombre del archivo de musica del cual se obtendra la metadata
- * @property {string} uri - Uri que representa la ubicación del archivo en el dispositivo 
+ * Definicion de File, Representa el file del cual se quiere obtener la metadata
+ * @typedef {Object} File
+ * @property {string} [name] - Nombre del archivo
+ * @property {string} uri - Representa la uri hacía el archivo del cual se desea obtener la MetaData
  */
 export interface File{
   name?:string;
@@ -28,8 +28,8 @@ export interface File{
 
 
 /**
- * @Interface
- * @MetaDataMP3 Representa toda la meta data obtenida del archivo por medio del pluggin
+ * Definicion de MetaDataMp3 Representa toda la meta data obtenida del archivo por medio del pluggin
+ * @typedef {Object} MetaDataMp3 
  * @property {MetaData} data - Array de metadatos obtenidos 
  */
 export interface MetaDataMp3{
@@ -37,8 +37,8 @@ export interface MetaDataMp3{
 }
 
 /**
- * @Interface
- * @MetaData Representa cada uno de los metadatos que se pueden obtener del pluggin
+ * Definicion de MetaData Representa cada uno de los metadatos que se pueden obtener del pluggin
+ * @typedef {Object} MetaData
  * @property {string} name - Nombre de la metadata obtenida
  * @property {string} value - Valor de la metadata obtenida
  */
