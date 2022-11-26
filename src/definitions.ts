@@ -23,11 +23,11 @@ export interface metadatamp3Plugin {
  */
 export interface File{
   /**
-   * @property {string} [name] - Nombre del archivo
+   * Nombre del archivo
    */
   name?:string;
   /**
-   * @property {string} uri - Representa la uri hacía el archivo del cual se desea obtener la MetaData
+   * Representa la uri hacía el archivo del cual se desea obtener la MetaData
    */
   uri:string;
 }
@@ -40,7 +40,7 @@ export interface File{
  */
 export interface MetaDataMp3{
   /**
-   * @property {MetaData} data - Array de metadatos obtenidos 
+   * Array de metadatos obtenidos 
    */
   data:MetaData[];
 }
@@ -53,11 +53,11 @@ export interface MetaDataMp3{
  */
 export interface MetaData{
   /**
-   * @property {string} name - Nombre de la metadata obtenida
+   * Nombre de la metadata obtenida
    */
   name:string;
   /**
-   * @property {string} value - Valor de la metadata obtenida
+   * Valor de la metadata obtenida
    */
   value:string;
 }

@@ -70,29 +70,29 @@ requestPermissions() => Promise<PermissionStatus>
 
 Definicion de <a href="#metadatamp3">MetaDataMp3</a> Representa toda la meta data obtenida del archivo por medio del pluggin
 
-| Prop       | Type                    |
-| ---------- | ----------------------- |
-| **`data`** | <code>MetaData[]</code> |
+| Prop       | Type                    | Description                  |
+| ---------- | ----------------------- | ---------------------------- |
+| **`data`** | <code>MetaData[]</code> | Array de metadatos obtenidos |
 
 
 #### MetaData
 
 Definicion de <a href="#metadata">MetaData</a> Representa cada uno de los metadatos que se pueden obtener del pluggin
 
-| Prop        | Type                |
-| ----------- | ------------------- |
-| **`name`**  | <code>string</code> |
-| **`value`** | <code>string</code> |
+| Prop        | Type                | Description                    |
+| ----------- | ------------------- | ------------------------------ |
+| **`name`**  | <code>string</code> | Nombre de la metadata obtenida |
+| **`value`** | <code>string</code> | Valor de la metadata obtenida  |
 
 
 #### File
 
 Definicion de <a href="#file">File</a>, Representa el file del cual se quiere obtener la metadata
 
-| Prop       | Type                |
-| ---------- | ------------------- |
-| **`name`** | <code>string</code> |
-| **`uri`**  | <code>string</code> |
+| Prop       | Type                | Description                                                                                      |
+| ---------- | ------------------- | ------------------------------------------------------------------------------------------------ |
+| **`name`** | <code>string</code> | Nombre del archivo                                                                               |
+| **`uri`**  | <code>string</code> | Representa la uri hacía el archivo del cual se desea obtener la <a href="#metadata">MetaData</a> |
 
 
 #### PermissionStatus
