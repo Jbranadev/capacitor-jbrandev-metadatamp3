@@ -16,10 +16,6 @@ export class metadatamp3Web extends WebPlugin implements metadatamp3Plugin {
   }
 
   
-  async echo(options: { value: string }): Promise<{ value: string }> {
-    console.log('ECHO', options);
-    return options;
-  }
 
   async getMetadata(file:File):Promise<MetaDataMp3>{
     throw this.unimplemented('Not implemented on web.' +file.name);

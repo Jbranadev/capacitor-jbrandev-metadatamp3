@@ -13,7 +13,6 @@ npx cap sync
 
 <docgen-index>
 
-* [`echo(...)`](#echo)
 * [`getMetadata(...)`](#getmetadata)
 * [`checkPermissions()`](#checkpermissions)
 * [`requestPermissions()`](#requestpermissions)
@@ -25,30 +24,17 @@ npx cap sync
 <docgen-api>
 <!--Update the source file JSDoc comments and rerun docgen to update the docs below-->
 
-### echo(...)
-
-```typescript
-echo(options: { value: string; }) => Promise<{ value: string; }>
-```
-
-| Param         | Type                            |
-| ------------- | ------------------------------- |
-| **`options`** | <code>{ value: string; }</code> |
-
-**Returns:** <code>Promise&lt;{ value: string; }&gt;</code>
-
---------------------
-
-
 ### getMetadata(...)
 
 ```typescript
 getMetadata(file: File) => Promise<MetaDataMp3>
 ```
 
-| Param      | Type                                  |
-| ---------- | ------------------------------------- |
-| **`file`** | <code><a href="#file">File</a></code> |
+Retorna la meta data del archivo proporcionado
+
+| Param      | Type                                  | Description                                                            |
+| ---------- | ------------------------------------- | ---------------------------------------------------------------------- |
+| **`file`** | <code><a href="#file">File</a></code> | - Representación del archivo de audio del cual se obtendra la metadata |
 
 **Returns:** <code>Promise&lt;<a href="#metadatamp3">MetaDataMp3</a>&gt;</code>
 
