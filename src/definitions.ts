@@ -18,7 +18,7 @@ export interface metadatamp3Plugin {
 /**
  * @Interface
  * @File Representa el file del cual se quiere obtener la metadata
- * @property {string} name - Nombre del archivo de musica del cual se obtendra la metadata
+ * @property {string} [name] - Nombre del archivo de musica del cual se obtendra la metadata
  * @property {string} uri - Uri que representa la ubicación del archivo en el dispositivo 
  */
 export interface File{
