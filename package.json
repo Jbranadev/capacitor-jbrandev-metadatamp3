@@ -17,7 +17,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Jbranadev/capacitor-jbrandev-metadatamp3.git.git"
+    "url": "git+https://github.com/Jbranadev/capacitor-jbrandev-metadatamp3.git"
   },
   "bugs": {
     "url": "https://github.com/Jbranadev/capacitor-jbrandev-metadatamp3.git/issues"
